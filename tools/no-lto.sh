@@ -14,12 +14,20 @@ repo=$(pwd)
 lib="libs/$triple/libloro.a"
 [ -f "$lib" ] || { echo "no such archive: $lib" >&2; exit 1; }
 
+# Binutils on a foreign host cannot read another architecture, so a cross
+# toolchain is addressed through a prefix (e.g. TOOL_PREFIX=aarch64-linux-gnu-).
+prefix=${TOOL_PREFIX:-}
+
 # Count the exported C API: the one thing that must not change.
 api() {
-  nm --defined-only -g "$1" 2>/dev/null | grep -Ec ' T _?ffi_loro' || true
+  "${prefix}nm" --defined-only -g "$1" 2>/dev/null | grep -Ec ' T _?ffi_loro' || true
 }
 
 before=$(api "$lib")
+[ "$before" -gt 0 ] || {
+  echo "could not read the ffi_loro API out of $lib (wrong TOOL_PREFIX?)" >&2
+  exit 1
+}
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 
@@ -32,14 +40,14 @@ case "$triple" in
   xcrun libtool -static -o "$lib" "$work/merged.o"
   ;;
 *-linux-musl)
-  (cd "$work" && ar x "$repo/$lib")
+  (cd "$work" && "${prefix}ar" x "$repo/$lib")
   mkdir "$work/out"
   for obj in "$work"/*.o; do
-    objcopy --remove-section=.llvmbc --remove-section=.llvmcmd \
+    "${prefix}objcopy" --remove-section=.llvmbc --remove-section=.llvmcmd \
       "$obj" "$work/out/$(basename "$obj")"
   done
   rm -f "$lib"
-  (cd "$work/out" && ar rcs "$repo/$lib" ./*.o)
+  (cd "$work/out" && "${prefix}ar" rcs "$repo/$lib" ./*.o)
   ;;
 *)
   echo "unsupported triple: $triple" >&2
@@ -58,7 +66,7 @@ if otool -l "$lib" 2>/dev/null | grep -q '__LLVM'; then
   echo "Mach-O __LLVM segment survived" >&2
   exit 1
 fi
-if readelf -S "$lib" 2>/dev/null | grep -qE '\.llvm(bc|cmd|\.lto)'; then
+if "${prefix}readelf" -S "$lib" 2>/dev/null | grep -qE '\.llvm(bc|cmd|\.lto)'; then
   echo "ELF LLVM section survived" >&2
   exit 1
 fi

@@ -24,7 +24,7 @@ jobs:
       - name: Strip LTO bitcode
         run: |
           bash tools/no-lto.sh x86_64-unknown-linux-musl
-          bash tools/no-lto.sh aarch64-unknown-linux-musl
+          TOOL_PREFIX=aarch64-linux-gnu- bash tools/no-lto.sh aarch64-unknown-linux-musl
 
       - name: Link-test the C API out of each archive
         run: |
