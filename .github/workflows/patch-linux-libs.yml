@@ -46,10 +46,9 @@ jobs:
           git config user.name "calionauta"
           git config user.email "calionauta@users.noreply.github.com"
           git add libs
-          git commit -m "build: ship libloro.a without LTO bitcode
-
-Go 1.27.4 refuses LTO IR in cgo linker inputs. Every object here also carries
-machine code, so the IR is redundant; the exported ffi_loro API is unchanged."
+          git commit \
+            -m "build: ship libloro.a without LTO bitcode" \
+            -m "Go 1.27.4 refuses LTO IR in cgo linker inputs. Every object here also carries machine code, so the IR is redundant; the exported ffi_loro API is unchanged."
           git tag v0.5.1
           git push origin HEAD:main
           git push origin v0.5.1
