@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/calionauta/loro-go/compare/v0.5.0...v0.6.0) (2026-11-18)
+
+
+### Features
+
+* own module path, so consumers need no replace ([ee41fa7](https://github.com/calionauta/loro-go/commit/ee41fa77ddc7dc35c7e88ab08f4ce49f64f9886c))
+
 ## [0.5.0](https://github.com/aholstenson/loro-go/compare/v0.4.0...v0.5.0) (2026-06-24)
 
 
