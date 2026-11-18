@@ -5,7 +5,7 @@ import (
 	"log"
 	"sort"
 
-	"github.com/aholstenson/loro-go"
+	"github.com/calionauta/loro-go"
 )
 
 // Basic usage: create a document, write to a root map, and read a typed value

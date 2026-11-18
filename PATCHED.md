@@ -1,5 +1,6 @@
 # This fork ships bitcode-free archives
 
+Module path: `github.com/calionauta/loro-go` (so it installs without a `replace`).
 Upstream: `github.com/aholstenson/loro-go` at **v0.5.0** (`b51c3b2d`,
 2026-06-24). The Go code here is upstream's, unmodified; only the prebuilt
 `libs/<triple>/libloro.a` archives differ.
@@ -41,7 +42,7 @@ rejecting them), delete the `replace` line pointing here and pin upstream
 again:
 
 ```
-go get github.com/aholstenson/loro-go@latest
+go get github.com/calionauta/loro-go@latest
 ```
 
 Nothing else in the consumer depends on this fork.

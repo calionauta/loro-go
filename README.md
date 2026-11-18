@@ -1,9 +1,9 @@
 # loro-go
 
-[![Release](https://img.shields.io/github/v/release/aholstenson/loro-go)](https://github.com/aholstenson/loro-go/releases)
-[![Go Reference](https://pkg.go.dev/badge/github.com/aholstenson/loro-go.svg)](https://pkg.go.dev/github.com/aholstenson/loro-go)
-[![Go Version](https://img.shields.io/github/go-mod/go-version/aholstenson/loro-go)](go.mod)
-[![License](https://img.shields.io/github/license/aholstenson/loro-go)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/calionauta/loro-go)](https://github.com/calionauta/loro-go/releases)
+[![Go Reference](https://pkg.go.dev/badge/github.com/calionauta/loro-go.svg)](https://pkg.go.dev/github.com/calionauta/loro-go)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/calionauta/loro-go)](go.mod)
+[![License](https://img.shields.io/github/license/calionauta/loro-go)](LICENSE)
 
 This repository contains [Loro CRDT](https://github.com/loro-dev/loro) bindings for Go. Contains pre-built binaries for MacOS (ARM64, AMD64), Linux (ARM64, AMD64), and Windows (AMD64).
 
@@ -14,7 +14,10 @@ Current Loro version: 1.13.6
 ## Usage
 
 ```console
-go get github.com/aholstenson/loro-go
+> This is a fork of [github.com/aholstenson/loro-go](https://github.com/aholstenson/loro-go)
+> that ships bitcode-free archives. See [PATCHED.md](PATCHED.md) for why and how to stop using it.
+
+go get github.com/calionauta/loro-go
 ```
 
 You need CGO enabled to build, but you do not need a Rust toolchain - the pre-built static libraries are included in this module.

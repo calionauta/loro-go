@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/aholstenson/loro-go"
+	"github.com/calionauta/loro-go"
 )
 
 func main() {
